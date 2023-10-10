@@ -10,7 +10,14 @@ const pwSort = (a, b) => {
     return x2 - x1;
 }
 
-const convertToFraction = (a, b) => {
+const gcd = (a, b) => {
+    if (b === 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+const divideByFraction = (a, b) => {
     if (!a || !b) throw new Error('Parameter is not a number!');
     const clacGcd = gcd(a, b);
     const numerator = a / clacGcd;
@@ -18,11 +25,16 @@ const convertToFraction = (a, b) => {
     return numerator + (denominator !== 1 ? "/" + denominator : "")
 }
 
-const gcd = (a, b) => {
-    if (b === 0) {
-        return a;
-    }
-    return gcd(b, a % b);
+const convertNumberToFraction = (number) => {
+    const decimalIndex = number.toString().indexOf(".");
+    const decimalValue = number.toString().substring(decimalIndex + 1);
+    let denominator = Math.pow(10, decimalValue.length);
+    let numerator = number * denominator;
+    const clacGcd = gcd(numerator, denominator);
+    denominator /= clacGcd;
+    numerator /= clacGcd;
+    return number + (denominator !== 1 ? "/" + denominator : "");
+    // return Math.floor(numerator) + '/' + Math.floor(denominator);
 }
 
 const backpack = (totalMass, things) => {
@@ -47,6 +59,6 @@ const backpack = (totalMass, things) => {
     return result;
 }
 
-
-console.log(convertToFraction(5, 100));
+console.log(divideByFraction(5, 100));
+console.log(convertNumberToFraction(342));
 console.log(backpack(20, things));
