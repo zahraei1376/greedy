@@ -33,7 +33,7 @@ const convertNumberToFraction = (number) => {
     const clacGcd = gcd(numerator, denominator);
     denominator /= clacGcd;
     numerator /= clacGcd;
-    return number + (denominator !== 1 ? "/" + denominator : "");
+    return numerator + (denominator !== 1 ? "/" + denominator : "");
     // return Math.floor(numerator) + '/' + Math.floor(denominator);
 }
 
@@ -48,7 +48,7 @@ const backpack = (totalMass, things) => {
         else if (thing.weight > rc) {
             const percent = rc / thing.weight;
             const weightPercent = percent * thing.weight;
-            result.set(thing.value, percent);
+            result.set(thing.value, convertNumberToFraction(percent));
             rc -= weightPercent;
         } else {
             result.set(thing.value, 1);
@@ -59,6 +59,4 @@ const backpack = (totalMass, things) => {
     return result;
 }
 
-console.log(divideByFraction(5, 100));
-console.log(convertNumberToFraction(342));
 console.log(backpack(20, things));
