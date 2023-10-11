@@ -54,8 +54,12 @@ const backpack = (totalMass, things) => {
 
 const backpackWithMiddle = (totalMass, things) => {
     const middle = things[Math.floor(things.length / 2)];
-    let arrayG, arrayE, arrayL = [];
-    let wG, wE, wL = 0;
+    const arrayG = [];
+    const arrayE = [];
+    const arrayL = [];
+    let wG = 0;
+    let wE = 0;
+    let wL = 0;
     const pwMiddle = middle.value / middle.weight;
     for (const thing of things) {
         const pwThing = thing.value / thing.weight;
