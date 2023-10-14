@@ -53,6 +53,16 @@ const backpack = (totalMass, things) => {
 }
 
 const backpackWithMiddle = (totalMass, things) => {
+    if (!totalMass) return;
+    if (things.length === 1) {
+        const thing = things[0];
+        if (totalMass < thing.weight) {
+            const percent = divideByFraction(totalMass, thing.weight);
+            return [{ weight: `${percent} * ${thing.weight}`, value: thing.value }]
+        } else {
+            return [{ weight: thing.weight, value: thing.value }]
+        }
+    }
     const middle = things[Math.floor(things.length / 2)];
     const arrayG = [];
     const arrayE = [];
@@ -64,14 +74,22 @@ const backpackWithMiddle = (totalMass, things) => {
     for (const thing of things) {
         const pwThing = thing.value / thing.weight;
         if (pwThing > pwMiddle) {
-            arrayG.push(pwThing);
-            wG += thing.value;
+            arrayG.push(thing);
+            wG += thing.weight;
         } else if (pwThing < pwMiddle) {
-            arrayL.push(pwThing);
-            wL += thing.value;
+            arrayL.push(thing);
+            wL += thing.weight;
         } else {
-            arrayE.push(pwThing);
-            wE += thing.value;
+            arrayE.push(thing);
+            wE += thing.weight;
         }
+    }
+
+    if (wG > totalMass) {
+        return backpackWithMiddle(totalMass, arrayG);
+    } else if (wG + wE > totalMass) {
+        return [...arrayG, ...backpackWithMiddle(totalMass - wG, arrayE)];
+    } else if (wG + wE + wL > totalMass) {
+        return [...arrayG, ...arrayE, ...backpackWithMiddle(totalMass - wG - wE, arrayL)]
     }
 }
