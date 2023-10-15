@@ -149,3 +149,64 @@ const findMiddleNumber = (arr) => {
     return select(arr, k);
 }
 
+const findMiddleOfArrayForBackPack = (arr) => {
+    const sortPW = (a, b) => {
+        const pw1 = a.value / a.weight;
+        const pw2 = b.value / b.weight;
+        return pw1 - pw2;
+    }
+
+    const select = (arr, k) => {
+        if (arr.length <= 5) {
+            arr.sort(sortPW);
+            return arr[k - 1];
+        }
+
+        const sublists = [];
+        for (let i = 0; i < arr.length; i += 5) {
+            sublists.push(arr.slice(i, i + 5));
+        }
+        const medians = sublists.map(sublist => {
+            return select(sublist, Math.floor(sublist.length / 2));
+        });
+
+        const medianOfMedians = select(medians, Math.floor(medians.length / 2));
+
+        const pivot = partition(arr, medianOfMedians);
+
+        if (k === pivot) {
+            return arr[pivot];
+        } else if (k < pivot) {
+            return select(arr.slice(0, pivot), k);
+        } else {
+            return select(arr.slice(pivot + 1), k - pivot - 1);
+        }
+    }
+
+    const partition = (arr, pivot) => {
+        let j = 0;
+        const pw1 = pivot.value / pivot.weight;
+        for (let i = 0; i < arr.length; i++) {
+            const pw2 = arr[i].value / arr[i].weight;
+            if (pw2 <= pw1) {
+                swap(arr, i, j);
+                j++;
+            }
+        }
+        return j;
+    }
+
+    const swap = (arr, a, b) => {
+        const temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+
+    if (arr.length === 0) {
+        return null;
+    }
+
+    const k = Math.floor(arr.length / 2);
+    return select(arr, k);
+}
+
