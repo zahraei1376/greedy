@@ -99,7 +99,7 @@ const findMiddleNumber = (arr) => {
     const select = (arr, k) => {
         if (arr.length <= 10) {
             arr.sort((a, b) => a - b);
-            return arr[k];
+            return arr[k - 1];
         }
 
         const sublists = [];
