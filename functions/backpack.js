@@ -63,7 +63,8 @@ const backpackWithMiddle = (totalMass, things) => {
             return [{ weight: thing.weight, value: thing.value }]
         }
     }
-    const middle = things[Math.floor(things.length / 2)];
+    // const middle = things[Math.floor(things.length / 2)];
+    const middle = findMiddleOfArrayForBackPack(things);
     const arrayG = [];
     const arrayE = [];
     const arrayL = [];
