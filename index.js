@@ -15,5 +15,9 @@ const things = [
 
 console.log(backpack(20, things));
 console.log(backpackWithMiddle(20, things));
-
-console.log(huffmanCodingBasis2());
+const array = [1, 4, 5, 99, 3, 6, 7];
+const minHeap = new Heap();
+minHeap.insertFromArray(array);
+console.log(JSON.parse(JSON.stringify(minHeap.array)));
+console.log(minHeap.removeMin());
+console.log(JSON.parse(JSON.stringify(minHeap.array)));

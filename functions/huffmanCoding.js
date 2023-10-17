@@ -39,6 +39,31 @@ class Heap {
             this.insert(element);
         }
     }
+
+    heapify(index) {
+        const left = this.array[2 * index + 1];
+        const right = this.array[2 * index + 2];
+        if (left || right) {
+            if (left > right) {
+                this.array[index] = right;
+                this.heapify(2 * index + 2);
+            } else {
+                this.array[index] = left;
+                this.heapify(2 * index + 1);
+            }
+        } else {
+            this.array.splice(index, 1);
+        }
+    }
+
+    removeMin() {
+        if (this.array.length === 0) {
+            throw new Error("heap is empty");
+        }
+        const out = this.array[0];
+        this.heapify(0);
+        return out;
+    }
 }
 const huffmanCodingBasis2 = () => {
     const array = [1, 4, 5, 99, 3, 6, 7];
