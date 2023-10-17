@@ -5,7 +5,7 @@ class Heap {
 
     insert(val) {
         this.array.push(val);
-        this.bubbleUp(this.array.length)
+        this.bubbleUp(this.array.length - 1)
     }
 
     getParent(childIndex) {
@@ -28,12 +28,21 @@ class Heap {
         const parentValue = this.getValue(parentIndex);
         const childValue = this.getValue(childIndex);
 
-        if (childValue > parentValue) {
+        if (childValue < parentValue) {
             this.swap(childIndex, parentIndex);
             this.bubbleUp(parentIndex);
         }
     }
-}
-const huffmanCodingBasis2 = (plenty) => {
 
+    insertFromArray(array) {
+        for (const element of array) {
+            this.insert(element);
+        }
+    }
+}
+const huffmanCodingBasis2 = () => {
+    const array = [1, 4, 5, 99, 3, 6, 7];
+    const minHeap = new Heap();
+    minHeap.insertFromArray(array);
+    return minHeap.array;
 }

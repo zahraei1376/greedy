@@ -15,3 +15,5 @@ const things = [
 
 console.log(backpack(20, things));
 console.log(backpackWithMiddle(20, things));
+
+console.log(huffmanCodingBasis2());
