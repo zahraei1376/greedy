@@ -1,11 +1,19 @@
-class Heap {
+class HuffmanNode {
+    constructor(char, freq, left, right) {
+        this.char = char;
+        this.freq = freq;
+        this.left = left;
+        this.right = right;
+    }
+}
+class HuffmanHeap {
     constructor() {
-        this.array = [];
+        this.heap = [];
     }
 
     insert(val) {
-        this.array.push(val);
-        this.bubbleUp(this.array.length - 1)
+        this.heap.push(val);
+        this.bubbleUp(this.heap.length - 1)
     }
 
     getParent(childIndex) {
@@ -13,13 +21,13 @@ class Heap {
     }
 
     getValue(index) {
-        return this.array[index];
+        return this.heap[index];
     }
 
     swap(i, j) {
-        const temp = this.array[i];
-        this.array[i] = this.array[j];
-        this.array[j] = temp;
+        const temp = this.heap[i];
+        this.heap[i] = this.heap[j];
+        this.heap[j] = temp;
     }
 
     bubbleUp(childIndex) {
@@ -34,41 +42,45 @@ class Heap {
         }
     }
 
-    insertFromArray(array) {
-        for (const element of array) {
+    insertFromheap(heap) {
+        for (const element of heap) {
             this.insert(element);
         }
     }
 
     heapify(index) {
-        const left = this.array[2 * index + 1];
-        const right = this.array[2 * index + 2];
+        const left = this.heap[2 * index + 1];
+        const right = this.heap[2 * index + 2];
         if (left || right) {
             if (left > right) {
-                this.array[index] = right;
+                this.heap[index] = right;
                 this.heapify(2 * index + 2);
             } else {
-                this.array[index] = left;
+                this.heap[index] = left;
                 this.heapify(2 * index + 1);
             }
         } else {
-            this.array.splice(index, 1);
+            this.heap.splice(index, 1);
         }
     }
 
     removeMin() {
-        if (this.array.length === 0) {
+        if (this.heap.length === 0) {
             throw new Error("heap is empty");
         }
-        const out = this.array[0];
+        const out = this.heap[0];
         this.heapify(0);
         return out;
     }
 
     findMin() {
-        return this.array[0];
+        return this.heap[0];
     }
 }
 const huffmanCodingBasis2 = () => {
-
+    const text = "this is an example for huffman encoding";
+    const charFreq = new Map();
+    for (const char of text) {
+        charFreq.set(char, (charFreq.get(char) || 0) + 1);
+    }
 }
