@@ -64,10 +64,11 @@ class Heap {
         this.heapify(0);
         return out;
     }
+
+    findMin() {
+        return this.array[0];
+    }
 }
 const huffmanCodingBasis2 = () => {
-    const array = [1, 4, 5, 99, 3, 6, 7];
-    const minHeap = new Heap();
-    minHeap.insertFromArray(array);
-    return minHeap.array;
+
 }
