@@ -24,3 +24,52 @@ for (const char of text) {
 }
 
 console.log(huffman(charFreq));
+//////////////////////////////////////activitySelection
+const lists = [
+    {
+        "start": 1,
+        "end": 4
+    },
+    {
+        "start": 0,
+        "end": 6
+    },
+    {
+        "start": 3,
+        "end": 5
+    },
+    {
+        "start": 3,
+        "end": 8
+    },
+    {
+        "start": 5,
+        "end": 7
+    },
+    {
+        "start": 6,
+        "end": 10
+    },
+    {
+        "start": 5,
+        "end": 9
+    },
+    {
+        "start": 8,
+        "end": 12
+    },
+    {
+        "start": 8,
+        "end": 11
+    },
+    {
+        "start": 2,
+        "end": 13
+    },
+    {
+        "start": 11,
+        "end": 14
+    },
+];
+
+console.log(activitySelection(lists));
