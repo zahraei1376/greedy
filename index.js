@@ -17,3 +17,10 @@ const things = [
 console.log(backpack(20, things));
 console.log(backpackWithMiddle(20, things));
 ////////////////////////////////////////huffman
+const text = "this is an example for huffman encoding I'm zahra Alipour";
+const charFreq = new Map();
+for (const char of text) {
+    charFreq.set(char, (charFreq.get(char) || 0) + 1);
+}
+
+console.log(huffman(charFreq));

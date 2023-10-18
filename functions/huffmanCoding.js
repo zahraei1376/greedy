@@ -113,3 +113,9 @@ const buildHuffmanCodesBasis2 = (huffmanTree, prefix = '', codes = {}) => {
 
     return codes;
 }
+
+const huffman = (charFreq) => {
+    const huffmanTree = buildHuffmanTreeBasis2(charFreq);
+    const huffmanCodes = buildHuffmanCodesBasis2(huffmanTree[0]);
+    return huffmanCodes;
+}
