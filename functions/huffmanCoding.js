@@ -1,18 +1,19 @@
 class HuffmanNode {
-    constructor(char, freq, left, right) {
+    constructor(char, freq, left = null, right = null) {
         this.char = char;
         this.freq = freq;
         this.left = left;
         this.right = right;
     }
 }
+
 class HuffmanHeap {
     constructor() {
         this.heap = [];
     }
 
-    insert(val) {
-        this.heap.push(val);
+    insert(node) {
+        this.heap.push(node);
         this.bubbleUp(this.heap.length - 1)
     }
 
@@ -21,7 +22,7 @@ class HuffmanHeap {
     }
 
     getValue(index) {
-        return this.heap[index];
+        return this.heap[index].freq;
     }
 
     swap(i, j) {
@@ -30,8 +31,20 @@ class HuffmanHeap {
         this.heap[j] = temp;
     }
 
+    bubbleUp2(index) {
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2);
+            if (this.getValue(parentIndex) > this.getValue(index)) {
+                [this.heap[parentIndex], this.heap[index]] = [this.heap[index], this.heap[parentIndex]];
+                index = parentIndex;
+            } else {
+                break;
+            }
+        }
+    }
+
     bubbleUp(childIndex) {
-        if (childIndex === 1) return;
+        if (childIndex === 0) return;
         const parentIndex = this.getParent(childIndex);
         const parentValue = this.getValue(parentIndex);
         const childValue = this.getValue(childIndex);
@@ -39,12 +52,6 @@ class HuffmanHeap {
         if (childValue < parentValue) {
             this.swap(childIndex, parentIndex);
             this.bubbleUp(parentIndex);
-        }
-    }
-
-    insertFromheap(heap) {
-        for (const element of heap) {
-            this.insert(element);
         }
     }
 
@@ -77,10 +84,19 @@ class HuffmanHeap {
         return this.heap[0];
     }
 }
-const huffmanCodingBasis2 = () => {
-    const text = "this is an example for huffman encoding";
-    const charFreq = new Map();
-    for (const char of text) {
-        charFreq.set(char, (charFreq.get(char) || 0) + 1);
+
+const buildHuffmanTreeBasis2 = (charFreq) => {
+    const minHeap = new HuffmanHeap();
+    for (const [char, freq] of charFreq.entries()) {
+        minHeap.insert(new HuffmanNode(char, freq))
     }
+
+    for (let i = 0; i < charFreq.size - 1; i++) {
+        const left = minHeap.removeMin();
+        const right = minHeap.removeMin();
+        const internalNode = new HuffmanNode(null, left.freq + right.freq, left, right);
+        minHeap.insert(internalNode);
+    }
+
+    return minHeap.heap;
 }

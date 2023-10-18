@@ -1,3 +1,4 @@
+////////////////////////////////////////bacpack
 const things = [
     { weight: 18, value: 25 },
     { weight: 15, value: 24 },
@@ -15,3 +16,4 @@ const things = [
 
 console.log(backpack(20, things));
 console.log(backpackWithMiddle(20, things));
+////////////////////////////////////////huffman
