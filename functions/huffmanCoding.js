@@ -100,3 +100,16 @@ const buildHuffmanTreeBasis2 = (charFreq) => {
 
     return minHeap.heap;
 }
+
+const buildHuffmanCodesBasis2 = (huffmanTree, prefix = '', codes = {}) => {
+
+    if (huffmanTree) {
+        if (huffmanTree.char) {
+            codes[huffmanTree.char] = prefix;
+        }
+        buildHuffmanCodesBasis2(huffmanTree.left, prefix + "0", codes);
+        buildHuffmanCodesBasis2(huffmanTree.right, prefix + "1", codes)
+    }
+
+    return codes;
+}
