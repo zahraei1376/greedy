@@ -25,7 +25,7 @@ for (const char of text) {
 
 console.log(huffman(charFreq));
 //////////////////////////////////////activitySelection
-const lists = [
+const activityList = [
     {
         "start": 1,
         "end": 4
@@ -72,4 +72,36 @@ const lists = [
     },
 ];
 
-console.log(activitySelection(lists));
+console.log(activitySelection(activityList));
+////////////////////////////////////
+const scheduleList = [
+    {
+        "profit": 10,
+        "deadline": 2
+    },
+    {
+        "profit": 20,
+        "deadline": 1
+    },
+    {
+        "profit": 15,
+        "deadline": 3
+    },
+    {
+        "profit": 25,
+        "deadline": 3
+    },
+    {
+        "profit": 35,
+        "deadline": 1
+    },
+    {
+        "profit": 30,
+        "deadline": 1
+    },
+    {
+        "profit": 40,
+        "deadline": 3
+    }
+]
+console.log(schedulingWithDeadLines(scheduleList));
